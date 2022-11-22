@@ -17,8 +17,14 @@ img{
     display: flex;
     flex-direction: column;
     justify-content:space-between;
-    text-align: end;
-    
+    align-items: flex-end;
+    text-align: end;   
+}
+
+.jogo section span{
+    font-size: 50px;
+    font-weight: 700;
+    font-family: 'Noto Sans','Roboto',Arial, Helvetica, sans-serif;
 }
 
 .jogo button {
@@ -32,3 +38,6 @@ img{
     border: none;
 }
 
+.jogo button:hover {
+    cursor: pointer;
+}
