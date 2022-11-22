@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Jogo from "./Jogo";
+import Letras from "./Letras";
 import palavras from "./palavras";
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         word={word}
         image={image}
       />
+      <Letras />
     </div>
   );
 }
