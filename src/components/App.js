@@ -15,15 +15,19 @@ export default function App() {
     { error: 6, image: "assets/forca6.png" },
   ];
   const [word, setWord] = useState("");
+  const [wordList, setWordList] = useState("");
+  const [answer, setAnswer] = useState(0);
   const [image, setImage] = useState(images[0].image);
+  const [kick, setKick] = useState("");
   function chooseWord() {
     const answer = palavras[Math.round(Math.random() * (palavras.length - 1))];
+    setWord(answer);
     let answerList = [];
     for (let i = 0; i < answer.length; i++) {
       answerList.push(answer[i]);
     }
-    setWord(answerList);
-    return answerList;
+    setWordList(answerList);
+    return answer;
   }
   function chooseLetter() {
     console.log("OK");
@@ -34,16 +38,24 @@ export default function App() {
         onClickFunction={() => {
           chooseWord();
         }}
-        word={word}
+        answer={answer}
+        word={wordList}
         image={image}
       />
       <Letras
-        word={word}
+        word={wordList}
         onClickFunction={() => {
           chooseLetter();
         }}
       />
-      <Chute word={word} />
+      <Chute
+        word={wordList}
+        valueText={kick}
+        handleChange={(e) => setKick(e.target.value)}
+        onClickFunction={() => {
+          kick === word ? setAnswer(1) : setAnswer(-1);
+        }}
+      />
     </div>
   );
 }
