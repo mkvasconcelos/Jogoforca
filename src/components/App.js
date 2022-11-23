@@ -56,6 +56,7 @@ export default function App() {
         word={wordList}
         pontuation={pontuation.pontuation}
         button={buttonLetter}
+        answer={answer}
         onClickFunction={(e) => {
           chooseLetter(e);
           increasePontuation();
