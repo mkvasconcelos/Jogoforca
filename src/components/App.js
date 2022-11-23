@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Chute from "./Chute";
 import Jogo from "./Jogo";
 import Letras from "./Letras";
 import palavras from "./palavras";
@@ -42,6 +43,7 @@ export default function App() {
           chooseLetter();
         }}
       />
+      <Chute word={word} />
     </div>
   );
 }
