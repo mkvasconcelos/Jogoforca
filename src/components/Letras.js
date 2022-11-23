@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Letras() {
+export default function Letras(props) {
   const alfabeto = [
     "a",
     "b",
@@ -32,7 +32,14 @@ export default function Letras() {
   return (
     <section className="letras">
       {alfabeto.map((l) => (
-        <button>{l.toUpperCase()}</button>
+        <button
+          key={l}
+          className={!props.word ? "" : "button-enable"}
+          onClick={props.onClickFunction}
+          disabled={!props.word}
+        >
+          {l.toUpperCase()}
+        </button>
       ))}
     </section>
   );

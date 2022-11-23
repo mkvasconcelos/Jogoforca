@@ -21,9 +21,11 @@ export default function App() {
     for (let i = 0; i < answer.length; i++) {
       answerList.push(answer[i]);
     }
-    console.log(answerList);
     setWord(answerList);
     return answerList;
+  }
+  function chooseLetter() {
+    console.log("OK");
   }
   return (
     <div>
@@ -34,7 +36,12 @@ export default function App() {
         word={word}
         image={image}
       />
-      <Letras />
+      <Letras
+        word={word}
+        onClickFunction={() => {
+          chooseLetter();
+        }}
+      />
     </div>
   );
 }
