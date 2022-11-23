@@ -32,8 +32,13 @@ export default function App() {
     setWordList(answerList);
     return answer;
   }
-  function chooseLetter(e) {
+  function chooseLetter(e, word) {
+    const letter = e.target.value;
     console.log(e.target.value);
+    console.log(word.includes(letter));
+    if (!word.includes(letter)) {
+      increasePontuation();
+    }
   }
   function increasePontuation() {
     const newPontuation = pontuation;
@@ -58,8 +63,7 @@ export default function App() {
         button={buttonLetter}
         answer={answer}
         onClickFunction={(e) => {
-          chooseLetter(e);
-          increasePontuation();
+          chooseLetter(e, word);
           setButtonLetter(true);
         }}
       />
