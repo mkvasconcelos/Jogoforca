@@ -15,9 +15,9 @@ export default function Jogo(props) {
             className={
               props.answer === 1
                 ? "word-right"
-                : props.answer === 0
-                ? ""
-                : "word-wrong"
+                : props.answer === -1 || props.pontuation === 6
+                ? "word-wrong"
+                : ""
             }
           >
             {props.word}

@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import Chute from "./Chute";
 import Jogo from "./Jogo";
@@ -14,11 +15,13 @@ export default function App() {
     { error: 5, image: "assets/forca5.png" },
     { error: 6, image: "assets/forca6.png" },
   ];
+  const [pontuation, setPontuation] = useState({ pontuation: 0 });
   const [word, setWord] = useState("");
   const [wordList, setWordList] = useState("");
   const [answer, setAnswer] = useState(0);
-  const [image, setImage] = useState(images[0].image);
+  const [image, setImage] = useState(images[pontuation.pontuation].image);
   const [kick, setKick] = useState("");
+  const [buttonLetter, setButtonLetter] = useState(false);
   function chooseWord() {
     const answer = palavras[Math.round(Math.random() * (palavras.length - 1))];
     setWord(answer);
@@ -29,8 +32,14 @@ export default function App() {
     setWordList(answerList);
     return answer;
   }
-  function chooseLetter() {
-    console.log("OK");
+  function chooseLetter(e) {
+    console.log(e.target.value);
+  }
+  function increasePontuation() {
+    const newPontuation = pontuation;
+    newPontuation.pontuation += 1;
+    setPontuation(newPontuation);
+    setImage(images[newPontuation.pontuation].image);
   }
   return (
     <div>
@@ -39,18 +48,25 @@ export default function App() {
           chooseWord();
         }}
         answer={answer}
+        pontuation={pontuation.pontuation}
         word={wordList}
         image={image}
       />
       <Letras
         word={wordList}
-        onClickFunction={() => {
-          chooseLetter();
+        pontuation={pontuation.pontuation}
+        button={buttonLetter}
+        onClickFunction={(e) => {
+          chooseLetter(e);
+          increasePontuation();
+          setButtonLetter(true);
         }}
       />
       <Chute
         word={wordList}
         valueText={kick}
+        answer={answer}
+        pontuation={pontuation.pontuation}
         handleChange={(e) => setKick(e.target.value)}
         onClickFunction={() => {
           kick === word ? setAnswer(1) : setAnswer(-1);

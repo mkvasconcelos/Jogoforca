@@ -34,9 +34,12 @@ export default function Letras(props) {
       {alfabeto.map((l) => (
         <button
           key={l}
-          className={!props.word ? "" : "button-enable"}
+          className={
+            !props.word || props.pontuation === 6 ? "" : "button-enable"
+          }
           onClick={props.onClickFunction}
-          disabled={!props.word}
+          disabled={!props.word || props.pontuation === 6}
+          value={l}
         >
           {l.toUpperCase()}
         </button>
