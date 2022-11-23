@@ -26,6 +26,7 @@ img{
     font-size: 50px;
     font-weight: 700;
     font-family: 'Noto Sans','Roboto',Arial, Helvetica, sans-serif;
+    letter-spacing: 5px;
 }
 
 .jogo button {

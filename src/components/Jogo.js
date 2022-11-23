@@ -20,7 +20,8 @@ export default function Jogo(props) {
                 : ""
             }
           >
-            {props.word}
+            {props.showWord}
+            {/* {props.word} */}
           </span>
         </div>
       </section>

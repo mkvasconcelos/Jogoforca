@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import Chute from "./Chute";
 import Jogo from "./Jogo";
@@ -19,24 +18,28 @@ export default function App() {
   const [word, setWord] = useState("");
   const [wordList, setWordList] = useState("");
   const [answer, setAnswer] = useState(0);
+  const [answerList, setAnswerList] = useState([]);
   const [image, setImage] = useState(images[pontuation.pontuation].image);
   const [kick, setKick] = useState("");
   const [buttonLetter, setButtonLetter] = useState(false);
-  function chooseWord() {
-    const answer = palavras[Math.round(Math.random() * (palavras.length - 1))];
-    setWord(answer);
-    let answerList = [];
-    for (let i = 0; i < answer.length; i++) {
-      answerList.push(answer[i]);
+  function chooseWord(answerList) {
+    const chosenWord =
+      palavras[Math.round(Math.random() * (palavras.length - 1))];
+    setWord(chosenWord);
+    let chosenWordList = [];
+    let newAnswerList = [...answerList];
+    for (let i = 0; i < chosenWord.length; i++) {
+      chosenWordList.push(chosenWord[i]);
+      newAnswerList.push("_");
     }
-    setWordList(answerList);
+    setAnswerList(newAnswerList);
+    setWordList(chosenWordList);
+    console.log(chosenWord);
     return answer;
   }
-  function chooseLetter(e, word) {
+  function chooseLetter(e, wordList) {
     const letter = e.target.value;
-    console.log(e.target.value);
-    console.log(word.includes(letter));
-    if (!word.includes(letter)) {
+    if (!wordList.includes(letter)) {
       increasePontuation();
     }
   }
@@ -47,14 +50,15 @@ export default function App() {
     setImage(images[newPontuation.pontuation].image);
   }
   return (
-    <div>
+    <>
       <Jogo
         onClickFunction={() => {
-          chooseWord();
+          chooseWord(answerList);
         }}
         answer={answer}
         pontuation={pontuation.pontuation}
         word={wordList}
+        showWord={answerList}
         image={image}
       />
       <Letras
@@ -77,6 +81,6 @@ export default function App() {
           kick === word ? setAnswer(1) : setAnswer(-1);
         }}
       />
-    </div>
+    </>
   );
 }
