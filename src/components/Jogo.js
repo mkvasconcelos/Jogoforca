@@ -20,8 +20,11 @@ export default function Jogo(props) {
                 : ""
             }
           >
-            {props.showWord}
-            {/* {props.word} */}
+            {props.answer === 1
+              ? props.word
+              : props.answer === -1 || props.pontuation === 6
+              ? props.word
+              : props.showWord}
           </span>
         </div>
       </section>
