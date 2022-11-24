@@ -34,6 +34,7 @@ export default function Letras(props) {
       {alfabeto.map((l) => (
         <button
           key={l}
+          data-test="letter"
           className={
             !props.word ||
             props.pontuation === 6 ||

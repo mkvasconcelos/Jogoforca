@@ -4,10 +4,14 @@ export default function Jogo(props) {
   return (
     <main className="jogo">
       <section>
-        <img src={props.image} alt="imagem-forca"></img>
+        <img data-test="game-image" src={props.image} alt="imagem-forca"></img>
       </section>
       <section>
-        <button onClick={props.onClickFunction} disabled={props.word}>
+        <button
+          data-test="choose-word"
+          onClick={props.onClickFunction}
+          disabled={props.word}
+        >
           Escolher Palavra
         </button>
         <div>
