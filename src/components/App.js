@@ -37,17 +37,24 @@ export default function App() {
     console.log(chosenWord);
     return answer;
   }
-  function chooseLetter(e, answerList) {
+  function chooseLetter(e, answerList, word) {
     const letter = e.target.value;
     if (!wordList.includes(letter)) {
       increasePontuation();
     } else {
       let newAnswerList = [];
+      let guess = "";
       for (let i = 0; i < answerList.length; i++) {
-        letter === wordList[i]
-          ? newAnswerList.push(letter)
-          : newAnswerList.push(answerList[i]);
+        if (letter === wordList[i]) {
+          newAnswerList.push(letter);
+          guess += letter;
+        } else {
+          newAnswerList.push(answerList[i]);
+          guess += answerList[i];
+        }
       }
+      guess === word ? setAnswer(1) : setAnswer(0);
+      setKick(guess);
       setAnswerList(newAnswerList);
     }
   }
@@ -76,7 +83,7 @@ export default function App() {
         button={buttonLetter}
         answer={answer}
         onClickFunction={(e) => {
-          chooseLetter(e, answerList);
+          chooseLetter(e, answerList, word);
           setButtonLetter(true);
         }}
       />
