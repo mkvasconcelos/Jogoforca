@@ -21,7 +21,6 @@ export default function App() {
   const [answerList, setAnswerList] = useState([]);
   const [image, setImage] = useState(images[pontuation.pontuation].image);
   const [kick, setKick] = useState("");
-  const [buttonLetter, setButtonLetter] = useState(false);
   const [lettersUsed, setLettersUsed] = useState([]);
   function chooseWord(answerList) {
     const chosenWord =
@@ -59,7 +58,6 @@ export default function App() {
       setKick(guess);
       setAnswerList(newAnswerList);
     }
-    console.log(newLettersUsed);
   }
   function increasePontuation() {
     const newPontuation = pontuation;
@@ -83,12 +81,10 @@ export default function App() {
       <Letras
         word={wordList}
         pontuation={pontuation.pontuation}
-        button={buttonLetter}
         answer={answer}
         list={lettersUsed}
         onClickFunction={(e) => {
           chooseLetter(e, answerList, word, lettersUsed);
-          setButtonLetter(true);
         }}
       />
       <Chute
@@ -98,7 +94,12 @@ export default function App() {
         pontuation={pontuation.pontuation}
         handleChange={(e) => setKick(e.target.value)}
         onClickFunction={() => {
-          kick === word ? setAnswer(1) : setAnswer(-1);
+          if (kick === word) {
+            setAnswer(1);
+          } else {
+            setAnswer(-1);
+            setImage(images[6].image);
+          }
         }}
       />
     </>
