@@ -37,10 +37,18 @@ export default function App() {
     console.log(chosenWord);
     return answer;
   }
-  function chooseLetter(e, wordList) {
+  function chooseLetter(e, answerList) {
     const letter = e.target.value;
     if (!wordList.includes(letter)) {
       increasePontuation();
+    } else {
+      let newAnswerList = [];
+      for (let i = 0; i < answerList.length; i++) {
+        letter === wordList[i]
+          ? newAnswerList.push(letter)
+          : newAnswerList.push(answerList[i]);
+      }
+      setAnswerList(newAnswerList);
     }
   }
   function increasePontuation() {
@@ -49,6 +57,7 @@ export default function App() {
     setPontuation(newPontuation);
     setImage(images[newPontuation.pontuation].image);
   }
+
   return (
     <>
       <Jogo
@@ -67,7 +76,7 @@ export default function App() {
         button={buttonLetter}
         answer={answer}
         onClickFunction={(e) => {
-          chooseLetter(e, word);
+          chooseLetter(e, answerList);
           setButtonLetter(true);
         }}
       />
