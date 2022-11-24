@@ -22,12 +22,22 @@ export default function App() {
   const [image, setImage] = useState(images[pontuation.pontuation].image);
   const [kick, setKick] = useState("");
   const [lettersUsed, setLettersUsed] = useState([]);
-  function chooseWord(answerList) {
+  function chooseWord() {
     const chosenWord =
       palavras[Math.round(Math.random() * (palavras.length - 1))];
-    setWord(chosenWord);
+    const newPontuation = { pontuation: 0 };
     let chosenWordList = [];
-    let newAnswerList = [...answerList];
+    let newAnswerList = [];
+    let newLettersUsed = [];
+    let newKick = "";
+    setPontuation(newPontuation);
+    setWord(chosenWord);
+    setWordList(chosenWordList);
+    setAnswer(0);
+    setAnswerList(newAnswerList);
+    setImage(images[newPontuation.pontuation].image);
+    setKick(newKick);
+    setLettersUsed(newLettersUsed);
     for (let i = 0; i < chosenWord.length; i++) {
       chosenWordList.push(chosenWord[i]);
       newAnswerList.push("_");
@@ -70,11 +80,12 @@ export default function App() {
     <>
       <Jogo
         onClickFunction={() => {
-          chooseWord(answerList);
+          chooseWord();
         }}
         answer={answer}
         pontuation={pontuation.pontuation}
-        word={wordList}
+        word={word}
+        wordList={wordList}
         showWord={answerList}
         image={image}
       />
@@ -93,13 +104,14 @@ export default function App() {
         answer={answer}
         pontuation={pontuation.pontuation}
         handleChange={(e) => setKick(e.target.value)}
-        onClickFunction={() => {
+        onClickFunction={(e) => {
           if (kick === word) {
             setAnswer(1);
           } else {
             setAnswer(-1);
             setImage(images[6].image);
           }
+          e.target.value = "";
         }}
       />
     </>

@@ -7,15 +7,13 @@ export default function Jogo(props) {
         <img data-test="game-image" src={props.image} alt="imagem-forca"></img>
       </section>
       <section>
-        <button
-          data-test="choose-word"
-          onClick={props.onClickFunction}
-          disabled={props.word}
-        >
+        <button data-test="choose-word" onClick={props.onClickFunction}>
           Escolher Palavra
         </button>
         <div>
           <span
+            data-test="word"
+            data-answer={!props.word ? "" : props.word}
             className={
               props.answer === 1
                 ? "word-right"
@@ -25,9 +23,9 @@ export default function Jogo(props) {
             }
           >
             {props.answer === 1
-              ? props.word
+              ? props.wordList
               : props.answer === -1 || props.pontuation === 6
-              ? props.word
+              ? props.wordList
               : props.showWord}
           </span>
         </div>

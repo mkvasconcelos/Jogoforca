@@ -10,7 +10,6 @@ img{
 .jogo{
     display: flex;
     margin: 40px;
-    display: flex;
     justify-content: space-between;
 }
 
