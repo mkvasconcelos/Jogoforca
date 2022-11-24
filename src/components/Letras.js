@@ -35,12 +35,20 @@ export default function Letras(props) {
         <button
           key={l}
           className={
-            !props.word || props.pontuation === 6 || props.answer !== 0
+            !props.word ||
+            props.pontuation === 6 ||
+            props.answer !== 0 ||
+            props.list.includes(l)
               ? ""
               : "button-enable"
           }
           onClick={props.onClickFunction}
-          disabled={!props.word || props.pontuation === 6 || props.answer !== 0}
+          disabled={
+            !props.word ||
+            props.pontuation === 6 ||
+            props.answer !== 0 ||
+            props.list.includes(l)
+          }
           value={l}
         >
           {l.toUpperCase()}

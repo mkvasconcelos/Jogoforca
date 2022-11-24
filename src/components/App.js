@@ -22,6 +22,7 @@ export default function App() {
   const [image, setImage] = useState(images[pontuation.pontuation].image);
   const [kick, setKick] = useState("");
   const [buttonLetter, setButtonLetter] = useState(false);
+  const [lettersUsed, setLettersUsed] = useState([]);
   function chooseWord(answerList) {
     const chosenWord =
       palavras[Math.round(Math.random() * (palavras.length - 1))];
@@ -34,11 +35,12 @@ export default function App() {
     }
     setAnswerList(newAnswerList);
     setWordList(chosenWordList);
-    console.log(chosenWord);
     return answer;
   }
-  function chooseLetter(e, answerList, word) {
+  function chooseLetter(e, answerList, word, lettersUsed) {
     const letter = e.target.value;
+    const newLettersUsed = [...lettersUsed, letter];
+    setLettersUsed(newLettersUsed);
     if (!wordList.includes(letter)) {
       increasePontuation();
     } else {
@@ -57,6 +59,7 @@ export default function App() {
       setKick(guess);
       setAnswerList(newAnswerList);
     }
+    console.log(newLettersUsed);
   }
   function increasePontuation() {
     const newPontuation = pontuation;
@@ -82,8 +85,9 @@ export default function App() {
         pontuation={pontuation.pontuation}
         button={buttonLetter}
         answer={answer}
+        list={lettersUsed}
         onClickFunction={(e) => {
-          chooseLetter(e, answerList, word);
+          chooseLetter(e, answerList, word, lettersUsed);
           setButtonLetter(true);
         }}
       />
