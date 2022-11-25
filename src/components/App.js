@@ -3,6 +3,7 @@ import Chute from "./Chute";
 import Jogo from "./Jogo";
 import Letras from "./Letras";
 import palavras from "./palavras";
+import caracterEspecial from "./caracterEspecial";
 
 export default function App() {
   const images = [
@@ -46,32 +47,65 @@ export default function App() {
     setWordList(chosenWordList);
     return answer;
   }
+
   function chooseLetter(e) {
     const letter = e.target.value;
     const newLettersUsed = [...lettersUsed, letter];
     setLettersUsed(newLettersUsed);
-    if (!wordList.includes(letter)) {
-      increasePontuation();
-    } else {
-      let newAnswerList = [];
-      let guess = "";
-      for (let i = 0; i < answerList.length; i++) {
-        if (letter === wordList[i]) {
-          newAnswerList.push(letter);
-          guess += letter;
-        } else {
-          newAnswerList.push(answerList[i]);
-          guess += answerList[i];
-        }
-      }
-      setAnswerList(newAnswerList);
-    }
+    checkLetter(letter);
   }
+
   function increasePontuation() {
     const newPontuation = pontuation;
     newPontuation.pontuation += 1;
     setPontuation(newPontuation);
     setImage(images[newPontuation.pontuation].image);
+  }
+
+  function checkLetter(letter) {
+    let condition = false;
+    const list = ["a", "e", "i", "o", "u", "c"];
+    let specialLetter = "";
+    if (list.includes(letter)) {
+      for (let i = 0; i < caracterEspecial[letter].length; i++) {
+        condition += wordList.includes(caracterEspecial[letter][i]);
+        if (wordList.includes(caracterEspecial[letter][i])) {
+          specialLetter = caracterEspecial[letter][i];
+        }
+      }
+    } else {
+      condition += wordList.includes(letter);
+      if (wordList.includes(letter)) {
+        specialLetter = letter;
+      }
+    }
+    console.log(letter, specialLetter, condition);
+    if (condition === 0) {
+      increasePontuation();
+    } else if (condition === 1) {
+      inputLetter(specialLetter);
+    } else {
+      for (let i = 0; i < caracterEspecial[letter].length; i++) {
+        console.log(caracterEspecial[letter][i]);
+        inputLetter(caracterEspecial[letter][i]);
+      }
+    }
+  }
+
+  function inputLetter(letter) {
+    let newAnswerList = [];
+    let guess = "";
+    for (let i = 0; i < answerList.length; i++) {
+      if (letter === wordList[i]) {
+        newAnswerList.push(letter);
+        guess += letter;
+      } else {
+        newAnswerList.push(answerList[i]);
+        guess += answerList[i];
+      }
+    }
+    guess === word ? setAnswer(1) : setAnswer(0);
+    setAnswerList(newAnswerList);
   }
 
   return (
