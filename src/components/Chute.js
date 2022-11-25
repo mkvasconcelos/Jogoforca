@@ -7,6 +7,7 @@ export default function Chute(props) {
       <input
         disabled={!props.word || props.answer !== 0 || props.pontuation === 6}
         onChange={props.handleChange}
+        value={props.guess}
         data-test="guess-input"
       ></input>
       <button

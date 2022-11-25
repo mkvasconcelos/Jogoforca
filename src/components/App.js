@@ -28,8 +28,8 @@ export default function App() {
     const newPontuation = { pontuation: 0 };
     let chosenWordList = [];
     let newAnswerList = [];
-    let newLettersUsed = [];
-    let newKick = "";
+    const newLettersUsed = [];
+    const newKick = "";
     setPontuation(newPontuation);
     setWord(chosenWord);
     setWordList(chosenWordList);
@@ -46,7 +46,7 @@ export default function App() {
     setWordList(chosenWordList);
     return answer;
   }
-  function chooseLetter(e, answerList, word, lettersUsed) {
+  function chooseLetter(e) {
     const letter = e.target.value;
     const newLettersUsed = [...lettersUsed, letter];
     setLettersUsed(newLettersUsed);
@@ -64,8 +64,6 @@ export default function App() {
           guess += answerList[i];
         }
       }
-      guess === word ? setAnswer(1) : setAnswer(0);
-      setKick(guess);
       setAnswerList(newAnswerList);
     }
   }
@@ -95,7 +93,7 @@ export default function App() {
         answer={answer}
         list={lettersUsed}
         onClickFunction={(e) => {
-          chooseLetter(e, answerList, word, lettersUsed);
+          chooseLetter(e);
         }}
       />
       <Chute
@@ -103,6 +101,7 @@ export default function App() {
         valueText={kick}
         answer={answer}
         pontuation={pontuation.pontuation}
+        guess={kick}
         handleChange={(e) => setKick(e.target.value)}
         onClickFunction={(e) => {
           if (kick === word) {
@@ -111,7 +110,7 @@ export default function App() {
             setAnswer(-1);
             setImage(images[6].image);
           }
-          e.target.value = "";
+          setKick("");
         }}
       />
     </>
