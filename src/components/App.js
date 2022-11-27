@@ -5,7 +5,6 @@ import Jogo from "./Jogo";
 import Letras from "./Letras";
 import palavras from "./palavras";
 import caracterEspecial from "./caracterEspecial";
-import styled from "styled-components";
 
 export default function App() {
   const images = [
@@ -87,10 +86,9 @@ export default function App() {
         specialLetter = letter;
       }
     }
-    console.log(letter, specialLetter, condition);
-    if (condition == 0) {
+    if (condition === 0) {
       increasePontuation();
-    } else if (condition == 1) {
+    } else if (condition === 1) {
       inputLetter(specialLetter);
     } else {
       inputLetter(letter);
