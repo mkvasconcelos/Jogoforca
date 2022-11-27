@@ -23,6 +23,12 @@ export default function App() {
   const [image, setImage] = useState(images[pontuation.pontuation].image);
   const [kick, setKick] = useState("");
   const [lettersUsed, setLettersUsed] = useState([]);
+  const [condSpecialCharacter, setCondSpecialCharacter] = useState(false);
+  const [specialCharacter, setSpecialCharacter] = useState("");
+  if (condSpecialCharacter) {
+    inputLetter(specialCharacter);
+    setCondSpecialCharacter(false);
+  }
   function chooseWord() {
     const chosenWord =
       palavras[Math.round(Math.random() * (palavras.length - 1))];
@@ -85,10 +91,9 @@ export default function App() {
     } else if (condition === 1) {
       inputLetter(specialLetter);
     } else {
-      for (let i = 0; i < caracterEspecial[letter].length; i++) {
-        console.log(caracterEspecial[letter][i]);
-        inputLetter(caracterEspecial[letter][i]);
-      }
+      inputLetter(letter);
+      setSpecialCharacter(specialLetter);
+      setCondSpecialCharacter(true);
     }
   }
 
@@ -105,7 +110,7 @@ export default function App() {
       }
     }
     guess === word ? setAnswer(1) : setAnswer(0);
-    setAnswerList(newAnswerList);
+    setAnswerList(() => newAnswerList);
   }
 
   return (
