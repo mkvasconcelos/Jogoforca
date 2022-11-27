@@ -86,9 +86,9 @@ export default function App() {
         specialLetter = letter;
       }
     }
-    if (condition === 0) {
+    if (condition == 0) {
       increasePontuation();
-    } else if (condition === 1) {
+    } else if (condition == 1) {
       inputLetter(specialLetter);
     } else {
       inputLetter(letter);
