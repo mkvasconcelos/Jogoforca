@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function Letras(props) {
   const alfabeto = [
@@ -30,7 +31,8 @@ export default function Letras(props) {
     "z",
   ];
   return (
-    <section className="letras">
+    <Section>
+      {/* // <section className="letras"> */}
       {alfabeto.map((l) => (
         <button
           key={l}
@@ -55,6 +57,30 @@ export default function Letras(props) {
           {l.toUpperCase()}
         </button>
       ))}
-    </section>
+      {/* </section> */}
+    </Section>
   );
 }
+
+const Section = styled.section`
+  margin: 70px 100px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  button {
+    font-weight: 700;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    color: #798a9f;
+    background: #9faab5;
+    border: 1px solid #7aa7c7;
+    border-radius: 3px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  .button-enable {
+    background: #e1ecf4;
+    color: #7aa7c7;
+  }
+`;
